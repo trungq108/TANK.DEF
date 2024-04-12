@@ -8,6 +8,6 @@ public class Health : MonoBehaviour
 
     void TakeDamage(int damage)
     {
-
+        this.health -= damage;
     }
 }

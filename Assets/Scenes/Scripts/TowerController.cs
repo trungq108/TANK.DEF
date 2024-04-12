@@ -46,7 +46,7 @@ public class TowerController : MonoBehaviour
 
     void Shooting(Vector3 shootingDirection, Collider target)
     {
-        target.gameObject.SetActive(false);
+        //target.gameObject.SetActive(false);
         StartCoroutine(ShootingProcess(shootingDirection));
     }
 
@@ -59,7 +59,6 @@ public class TowerController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         laserLine.enabled = false;
-
     }
 
 }
