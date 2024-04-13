@@ -6,15 +6,12 @@ public class TowerController : MonoBehaviour
 {
     [SerializeField] Transform playerHead;
     [SerializeField] Transform muzzle;
-
     LineRenderer laserLine;
-    bool isShooting;
-    public static TowerController instance;
+
 
     private void Awake()
     {
         laserLine = GetComponent<LineRenderer>();
-        instance = this;
     }
 
     private void Start()
@@ -41,7 +38,7 @@ public class TowerController : MonoBehaviour
             hitTarget = hit.collider;
         }
 
-        if(Input.GetMouseButtonDown(0) && !isShooting)
+        if(Input.GetMouseButtonDown(0))
         {
             Shooting(direction, hitTarget);
         }
@@ -49,15 +46,8 @@ public class TowerController : MonoBehaviour
 
     void Shooting(Vector3 shootingDirection, Collider target)
     {
-        isShooting = true;
-        int damage = Random.Range(1, 5);
+        //target.gameObject.SetActive(false);
         StartCoroutine(ShootingProcess(shootingDirection));
-
-        Health targetHealth = target.GetComponent<Health>();
-        if (targetHealth != null)
-        {
-            targetHealth.TakeDamage(damage);
-        }
     }
 
     IEnumerator ShootingProcess(Vector3 shotDirection)
@@ -66,12 +56,9 @@ public class TowerController : MonoBehaviour
         laserLine.SetPosition(0, muzzle.position);
         laserLine.SetPosition(1, shotDirection);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
 
         laserLine.enabled = false;
-        isShooting = false;
     }
-
-
 
 }
