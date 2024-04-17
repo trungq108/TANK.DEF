@@ -10,6 +10,7 @@ public class TowerController : MonoBehaviour
 
     LineRenderer laserLine;
     bool isShooting;
+    Vector3 direction;
 
     public static TowerController instance;
 
@@ -29,16 +30,16 @@ public class TowerController : MonoBehaviour
 
     void PlayerRotate()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        Vector3 direction = new Vector3();
+        Vector3 mousePosition = Input.mousePosition;
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        Debug.DrawRay(ray.origin, ray.direction * 50, Color.yellow);
         int layerMask = 1 << 6;
         layerMask = ~layerMask;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
-        {            
+        if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
+        {
             direction = hit.point;
-            playerHead.transform.LookAt(direction + Vector3.up);
+            playerHead.LookAt(direction - playerHead.position + Vector3.up);
         }
     }
 
