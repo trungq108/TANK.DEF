@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -19,7 +20,7 @@ public class EnemyBehavior : MonoBehaviour
 
     private void OnEnable()
     {
-        EnemyPool = FindAnyObjectByType<EnemyPool>();
+        EnemyPool = FindObjectOfType<EnemyPool>();
         playerPosition = EnemyPool.PlayerPosition;
         originalRotation = headCanon.transform.rotation;
 
